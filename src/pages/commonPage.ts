@@ -60,7 +60,8 @@ export class CommonPage {
 
     async verifyToastMessage(expectedMessage: string) {
      const toast = this.page.locator("//div[contains(@class,'p-toast-summary')]");
-     await expect(toast).toContainText(expectedMessage);
+     //await expect(toast).toContainText(expectedMessage);
+     await expect(toast).toHaveText(expectedMessage);
     }
 
     async clickOnAddButton(){
