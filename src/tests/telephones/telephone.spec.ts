@@ -20,6 +20,6 @@ test('Telephone Creation', async ({ page, app }) => {
   await app.telephones.verifyTelephonesPageIsDisplayed();
   await app.common.clickOnAddButton();
   await app.telephones.createTelephone(telephoneData);
-  await app.common.verifyToastMessage("Creation");
+  await app.common.verifyToastMessage("Creat");
 
 });

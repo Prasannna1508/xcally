@@ -20,15 +20,19 @@ jobs:
       with:
         node-version: 18
 
-    - name: Install dependencies
+    - name: Install dependencies  
       run: npm ci
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
+    # 👇 Step 1: Run tests but allow failure
     - name: Run Playwright tests
+      id: test_step
       run: npx playwright test
+      continue-on-error: true
 
+    # 👇 Step 2: Always upload report
     - name: Upload Playwright Report
       if: always()
       uses: actions/upload-artifact@v4
@@ -36,3 +40,23 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 7
+
+    # 👇 Step 3: Run only if tests failed
+    - name: Notify on Failure
+      if: failure()
+      run: echo "Tests failed! Please check the report."
+
+    # 👇 Step 4: Run only if tests passed
+    - name: Success Message
+      if: success()
+      run: echo "All tests passed successfully!"
+
+    # 👇 Step 5: Handle cancellation
+    - name: If Workflow Cancelled
+      if: cancelled()
+      run: echo "Workflow was cancelled!"
+
+    # 👇 Step 6: Finally fail job if tests failed
+    - name: Fail Job If Tests Failed
+      if: steps.test_step.outcome == 'failure'
+      run: exit 1
