@@ -13,7 +13,7 @@ type MyPages = {
 
 export const test = base.extend<MyPages>({
   app: async ({ page }, use) => {
-
+{}
     const app = {
       login: new LoginPage(page),
       telephones: new TelephonesPage(page),

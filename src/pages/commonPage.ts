@@ -9,11 +9,13 @@ export class CommonPage {
     private confirmButton;
     private deleteIcon;
     private creationHeaderTitle;
+    private table_GlobalSearch;
     private confirmDeleteButton;
 
     constructor( page:Page)
      {
             this.page = page;
+            this.table_GlobalSearch = page.locator('#actionFlow_chatgpt')
 
         this.addButton = page.locator('#table_button_add')
         this.ellipsisButton =page.locator('.pi-ellipsis-v"]')
@@ -101,5 +103,9 @@ export class CommonPage {
        await expect(confirmMsg).toBeVisible();
     }
 
+
+    // async search(){
+    //   await this.
+    // }
 
   }
