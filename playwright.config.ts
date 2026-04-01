@@ -54,15 +54,11 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
-  projects: [
+projects: [
   {
     name: 'setup',
     testMatch: /.*\.setup\.ts/,
   },
-  {
-    name: 'tests',
-    dependencies: ['setup'],
-  },
+  ...getProjects(),  
 ],
-// ✅ ALWAYS an array of objects
 });
