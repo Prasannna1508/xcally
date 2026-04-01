@@ -40,7 +40,6 @@ function getProjects() {
 
 export default defineConfig({
   testDir: './src/tests',
-    globalTeardown: require.resolve('./src/tests/setup/global-teardown'),
 
   fullyParallel: true,
   retries: process.env.CI ? 2 : 0,
@@ -54,11 +53,26 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
-projects: [
-  {
-    name: 'setup',
-    testMatch: /.*\.setup\.ts/,
-  },
-  ...getProjects(),  
-],
+  projects: [
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+      dependencies: ['setup'],
+    },
+  ],
 });
