@@ -86,7 +86,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      # 6️⃣ Run tests (parallel browsers using matrix)
+     # 6️⃣ Run tests (parallel browsers using matrix)
       - name: Run Playwright Tests
         id: test_step
         run: npx playwright test --project=${{ matrix.browser }}
